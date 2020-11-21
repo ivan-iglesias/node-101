@@ -1,4 +1,10 @@
 const http = require('http');
+const config = require('config');
+
+const app = {
+    env: config.util.getEnv('NODE_ENV'),
+    port: config.get('app.port')
+};
 
 const server = http.createServer((req, res) => {
     if (req.url == '/date') {
@@ -10,6 +16,6 @@ const server = http.createServer((req, res) => {
     res.end('Invalid request!');
 });
 
-server.listen(8000);
+server.listen(app.port);
 
-console.log('server running on port 8000');
+console.log(`server running on port ${app.port} (${app.env})`);
