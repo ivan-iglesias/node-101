@@ -1,3 +1,4 @@
+const fs = require('fs');
 const http = require('http');
 const config = require('config');
 
@@ -7,11 +8,23 @@ const app = {
 };
 
 const server = http.createServer((req, res) => {
-    if (req.url == '/date') {
+    if (req.url == '/app') {
         res.writeHead(200, { 'Content-Type': 'application/json' });
-        res.write(JSON.stringify({ now: new Date() }));
-        res.end();
+        res.write(JSON.stringify(app));
+        return res.end();
     }
+
+    if (req.url == '/users') {
+        return fs.readFile(__dirname + '/users.txt', 'utf8', function (err, data) {
+            if (err) {
+                res.writeHead(404);
+                return res.end(JSON.stringify(err));
+            }
+
+            res.writeHead(200, {'Content-Type': 'text/plain'});
+            return res.end(data);
+        });
+    };
 
     res.end('Invalid request!');
 });
