@@ -18,7 +18,7 @@ npm i http
 node simple.js
 ```
 
-Para usar ficheros de configuración
+Para usar ficheros de configuración. Si establecemos NODE_ENV como `development`, y no existe un fichero con tal nombre, usará el fichero `default.yaml`.
 
 ```sh
 # Instalar config y js-yaml
@@ -26,7 +26,7 @@ npm i config js-yaml
 
 # Añadir las siguientes variables de entorno
 export NODE_ENV=development
-export NODE_CONFIG_DIR=/mnt/d/code/node/
+export NODE_CONFIG_DIR=/mnt/d/code/node-101/
 ```
 
 ## Variables de entorno
